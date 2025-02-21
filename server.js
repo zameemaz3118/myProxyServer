@@ -13,6 +13,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Route par défaut
+app.get("/", (req, res) => {
+  res.send("Bienvenue sur le serveur proxy!");
+});
+
 // Route du proxy
 app.post("/proxy", async (req, res) => {
   try {
