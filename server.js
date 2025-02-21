@@ -9,9 +9,8 @@ const PORT = process.env.PORT || 3000;
 // Autoriser toutes les origines avec CORS
 app.use(cors());
 
-// Parse les requêtes JSON et les données d'URL
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Utilisation de raw pour les requêtes XML
+app.use(express.raw({ type: 'text/xml' }));
 
 // Route par défaut
 app.get("/", (req, res) => {
@@ -20,7 +19,7 @@ app.get("/", (req, res) => {
 
 // Route du proxy
 app.post("/proxy", async (req, res) => {
-  console.log("Requête reçue :", req.body); // Log des données reçues par le serveur
+  console.log("Requête reçue :", req.body.toString()); // Log des données reçues par le serveur
 
   try {
     const apiUrl = "https://search-fel.centprod.com/v3/search-fel";
